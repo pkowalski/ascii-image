@@ -55,7 +55,7 @@ fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>) {
 }
 
 fn main() {
-    let image_to_convert = load_image("cat2.jpg");
+    let image_to_convert = load_image("cat.jpg");
     let resized_image = resize_img(&image_to_convert);
     generate_ascii(resized_image);
 }
