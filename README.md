@@ -6,8 +6,8 @@ Converts an image into its ASCII character representation. Currently works best 
 cargo run
 ```
 
- Output
-Will turn this
+# Input
 ![Image description](./cat.jpg)
-into
+
+# Output
 ![Image description](./cat-ascii.png)
