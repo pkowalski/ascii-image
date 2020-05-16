@@ -1,4 +1,4 @@
-# ascii-image
+# ASCII Image
 
 Converts an image into its ASCII character representation. Currently works best with image included in this repo
 
@@ -6,8 +6,8 @@ Converts an image into its ASCII character representation. Currently works best 
 cargo run
 ```
 
- Output
-Will turn this
+# Input
 ![Image description](./cat2.jpeg)
-into
+
+# Output
 ![Image description](./cat-ascii-example.png)
