@@ -8,6 +8,6 @@ cargo run
 
  Output
 Will turn this
-![Image description](./cat.jpg)
+![Image description](./cat2.jpeg)
 into
-![Image description](./cat-ascii.png)
+![Image description](./cat-ascii-example.png)
