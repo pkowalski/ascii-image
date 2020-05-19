@@ -1,10 +1,11 @@
 extern crate image;
 
+use std::env;
 use image::*;
 use term_size;
 
 fn get_term_size() -> u32 {
-    if let Some((w, h)) = term_size::dimensions() {
+    if let Some((w, _)) = term_size::dimensions() {
         w as u32
     } else {
         1
@@ -45,7 +46,7 @@ fn resize_img(image: &DynamicImage) -> ImageBuffer<image::Rgba<u8>, Vec<u8>> {
     image.to_rgba()
 }
 
-fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>) {
+fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>, invert: bool) {
     let width = image_buff.width();
     let height = image_buff.height();
 
@@ -58,7 +59,13 @@ fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>) {
         for j in 0..width {
             let pixel = image_buff.get_pixel(j, i);
             let image::Rgba(data) = pixel;
-            let average = (data[0] as i32 + data[1] as i32 + data[2] as i32) / 3;
+            let mut average = (data[0] as i32 + data[1] as i32 + data[2] as i32) / 3;
+
+            if invert {
+                average = average - 255;
+            }
+            //let invert = average - 255;
+
             let ratio = average as f32 / 255.0;
 
             let mut ascii_eq = ratio * ascii_vec.len() as f32;
@@ -73,7 +80,18 @@ fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>) {
 }
 
 fn main() {
-    let image_to_convert = load_image("cat2.jpeg");
+    let args: Vec<String> = env::args().collect();
+    let mut default_image = "cat2.jpeg";
+    let mut invert = false;
+
+    if args.len() > 1 {
+        default_image = &args[1];
+    }
+    if args.len() > 2 && args[2] == "invert" {
+        invert = true; 
+    }
+
+    let image_to_convert = load_image(default_image);
     let resized_image = resize_img(&image_to_convert);
-    generate_ascii(resized_image);
+    generate_ascii(resized_image, invert);
 }
