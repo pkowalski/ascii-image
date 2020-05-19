@@ -80,7 +80,7 @@ fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>, invert: boo
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let mut default_image = "cat2.jpeg";
+    let mut default_image = "cat2.jpg";
     let mut invert = false;
 
     if args.len() > 1 {
