@@ -62,9 +62,8 @@ fn generate_ascii(image_buff: ImageBuffer<image::Rgba<u8>, Vec<u8>>, invert: boo
             let mut average = (data[0] as i32 + data[1] as i32 + data[2] as i32) / 3;
 
             if invert {
-                average = average - 255;
+                average = (average - 255).abs();
             }
-            //let invert = average - 255;
 
             let ratio = average as f32 / 255.0;
 
